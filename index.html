@@ -1,7 +1,97 @@
 <!DOCTYPE html>
 <html>
-	<body>
-		<h1>Hello World</h1>
-		<p>I'm hosted with GitHub Pages.</p>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="fmk.css">
+		<link rel="shortcut icon" href="favIcon.png">
+		<title>Fuck, Marry, Kill</title>
+		<meta charset="UTF-8">
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+	</head>
+	<body class="dark">
+		<noscript><p class="js warning">FMK relies on JavaScript to function.</p></noscript>
+		<div class="screen menuScreen">
+			<div class="menuColumn">
+				<div class="header">
+					<img src="newTransparent.png" width="300" height="auto" />
+					
+					<h1>Fuck, Marry, Kill</h1>
+					
+					<svg height="20" width="450">
+						<line x1="0" y1="10" x2="205" y2="10" style="stroke:#fafafa; stroke-width:3"/>
+						<rect x="205" y="1" width="40" height="18" style="stroke-width:2;stroke: #fafafa; fill: rgba(0,0,0,0)" />
+						<text x="213" y="14" style="fill: #fafafa; font-size: 12px">FMK</text>
+						<line x1="245" y1="10" x2="450" y2="10" style="stroke:#fafafa; stroke-width:3"/>
+					</svg>
+					
+					<div class="subtitle">
+						<div>by <span>PDFOrigami</span></div>
+						<div id="version">v. 1.0</div>
+					</div>
+				</div>
+			</div>
+			<svg id="divider" width="20">
+				<line  x1="10" y1="20" x2="10" y2="2000" style="stroke:#fafafa; stroke-width:3"/>
+			</svg>
+			<div class="menuColumn">
+				<div class="primaryButton button menuButton" onclick="toScreen('setup')">Play</div>
+				<div class="button menuButton" onclick="toScreen('settings')">Settings</div>
+				<div class="button menuButton">Stats</div>
+				<a href="https://reddit.com/r/FMKGame"><div class="button menuButton redditButton" ><img width="20" height="auto" src="redditIcon.png">Discuss</div></a>
+			</div>
+		</div>
+		<div class="screen settingsScreen">
+			<div class="options"><p>Settings</p></div>
+		</div>
+		<div class="screen setupScreen">
+			<div class="optionsCont">
+				
+				<div class="options" id="characters">
+					<p>Characters</p>
+					
+					<div class="tooltip"></div>
+				</div>
+				<div class="centerColumn">
+					<div class="options" id="genders">
+						<p>Genders</p>
+						<label><input type="checkbox"> Male</label>
+						<label><input type="checkbox" checked="true"> Female</label>
+					</div>
+					<div class="options" id="custom">
+						<p>Custom Characters</p>
+						<textarea placeholder="Alice, Brooklyn, Charlotte" rows="5" cols="40"></textarea>
+						<button class="button primaryButton" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
+						<button class="button primaryButton" onclick="saveCustom(); updateCustom()">Save</button>
+					</div>
+				</div>
+				
+				<div id="actions" class="options">
+					<p>Actions</p>
+					<label><input type="checkbox" checked="true"> Fuck</label>
+					<label><input type="checkbox" checked="true"> Marry</label>
+					<label><input type="checkbox" checked="true"> Kill</label>
+					<label><input type="checkbox"> Deepthroat</label>
+					<label><input type="checkbox"> Beat up</label>
+					<label><input type="checkbox"> Eat out</label>
+					<label><input type="checkbox"> Rape</label>
+				</div>
+			</div>
+			<div class="navCont">			
+				<div class="button navButton" onclick="toScreen('menu')">Menu</div>
+				<p class="warning"></p>
+				<div class="primaryButton navButton button" onclick="validateOptions()">Start</div>
+			</div>
+		</div>
+		<div class="screen gameScreen">
+			<div class="charCont"></div>
+			<div class="actionsCont"></div>
+			<div class="navCont">			
+				<div class="button navButton" onclick="toScreen('setup')">Options</div>
+				<div class="button navButton" onclick="main()">Skip</div>
+				<div class="button navButton primaryButton" onclick="validateChoices()">Next</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="fmk.js"></script>
 	</body>
 </html>
