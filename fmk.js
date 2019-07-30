@@ -24,12 +24,13 @@ let charArrays = {
 	Custom: !(localStorage.getItem('custom')) ? [] : localStorage.getItem('custom').split(","),
 };
 
+// Character labels and checkboxes
 for (const KV of Object.entries(charArrays)) {
 	KV[1].sort();
 	if (KV[0] == 'Custom') {
-		$('#characters').append('<label><input type="checkbox"> '+ KV[0] +' <span class="charNumber"></span></label>');
+		$('#charList').append('<label><input type="checkbox"> '+ KV[0] +' <span class="charNumber"></span></label>');
 	} else {		
-		$('#characters').append('<label><input type="checkbox" checked="true"> '+ KV[0] +' <span class="charNumber"></span></label>');
+		$('#charList').append('<label><input type="checkbox" checked="true"> '+ KV[0] +' <span class="charNumber"></span></label>');
 	}
 }
 
@@ -46,7 +47,7 @@ function validateOptions() {
 
 	enabledMedia = [], enabledChars = [], actions = [];
 	
-	$('#characters input').each( function() { // Get media
+	$('#charList input').each( function() { // Get media
 		if ($(this).is(':checked')) {
 			let str = $(this).parent().text();
 			enabledMedia.push(str.substring(1, str.lastIndexOf(" ")));
@@ -94,7 +95,7 @@ function main() {
 	shuffle(enabledChars);
 	
 	for (let i=0; i<actions.length; i++) {
-		$('.charCont').append('<div class="character"> <img src="img/'+enabledChars[i]+'.png"> <p class="charName">'+enabledChars[i]+'</p> <p class="charSource">'+findSourceMedia(enabledChars[i])+'</p> </div>');
+		$('.charCont').append('<div class="character"> <img src="img/'+enabledChars[i]+'.png" onerror="if (this.src != \'img/noImage.png\') this.src = \'img/noImage.png\';"> <p class="charName">'+enabledChars[i]+'</p> <p class="charSource">'+findSourceMedia(enabledChars[i])+'</p> </div>');
 		$('.actionsCont').append('<div class="action"><p>'+actions[i]+'</p><div class="dropdown"><select></select></div></div>');
 	};
 	$('select').append('<option value="" selected></option>');
@@ -123,6 +124,47 @@ function main() {
 
 
 // Helper functions
+
+function statistics() {
+	var charList = [];
+	for (const KV of Object.entries(charArrays)) {
+		charList = charList.concat(KV[1]);
+	}
+	charList.sort()
+	for (let c of charList) {
+		let html = `<div class="card statBox">
+							<div class="darkFilter">
+								<p>`+c+`</p>
+								<div class="barCont">
+									<span>Fuck</span>
+									<div class="bar"><div></div></div>
+									<span>Marry</span>
+									<div class="bar"><div></div></div>
+									<span>Kill</span>
+									<div class="bar"><div></div></div>
+								</div>
+							</div>
+						</div>`
+		
+		$(html).appendTo('.statsCont').css("background-image", "url(img/"+c+".png)");  
+	}
+}
+
+function selections(instruction, list) {
+	$('#'+list+' input').each( function() {
+		$(this).prop("checked", (instruction == 'select'));
+	});
+};
+
+function switchLocality(loc) {
+	if (loc == 'local') {
+		$('.switchCont div').first().addClass('selectedSwitch');
+		$('.switchCont div').last().removeClass('selectedSwitch');		
+	} else {
+		$('.switchCont div').last().addClass('selectedSwitch');
+		$('.switchCont div').first().removeClass('selectedSwitch');
+	}
+}
 
 function findSourceMedia(character) {
 	for (let media of enabledMedia) {
@@ -184,6 +226,3 @@ $('.options span').hover(
 
 // Misc
 
-function darkMode() {
-	$('body').toggleClass('dark');
-}

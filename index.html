@@ -25,7 +25,7 @@
 					</svg>
 					
 					<div class="subtitle">
-						<div>by <span>PDFOrigami</span></div>
+						<div>by <span>NuclearWartoad</span></div>
 						<div id="version">v. 1.0</div>
 					</div>
 				</div>
@@ -36,28 +36,43 @@
 			<div class="menuColumn">
 				<div class="primaryButton button menuButton" onclick="toScreen('setup')">Play</div>
 				<div class="button menuButton" onclick="toScreen('settings')">Settings</div>
-				<div class="button menuButton">Stats</div>
+				<div class="button menuButton" onclick="toScreen('stats'); statistics()">Stats</div>
 				<a href="https://reddit.com/r/FMKGame"><div class="button menuButton redditButton" ><img width="20" height="auto" src="redditIcon.png">Discuss</div></a>
 			</div>
 		</div>
 		<div class="screen settingsScreen">
-			<div class="options"><p>Settings</p></div>
+			<div class="card"><p>Settings</p></div>
+		</div>
+		<div class="screen statsScreen">
+			<div class="statsHeader">
+				<h2>Statistics</h2>
+				<div class="switchCont">
+					<div class="selectedSwitch" onclick="switchLocality('local')">Local</div>
+					<div onclick="switchLocality('global')">Global</div>
+				</div>
+			</div>
+			<div class="statsCont">
+			</div>
 		</div>
 		<div class="screen setupScreen">
 			<div class="optionsCont">
 				
-				<div class="options" id="characters">
+				<div class="card optionsBox" id="characters">
 					<p>Characters</p>
 					
+					<div id="charList"></div>
+					
+					<button class="button primaryButton" onclick="selections('select', 'charList')">Select all</button>
+					<button class="button primaryButton" onclick="selections('unselect', 'charList')">Unselect all</button>
 					<div class="tooltip"></div>
 				</div>
 				<div class="centerColumn">
-					<div class="options" id="genders">
+					<div class="card optionsBox" id="genders">
 						<p>Genders</p>
 						<label><input type="checkbox"> Male</label>
 						<label><input type="checkbox" checked="true"> Female</label>
 					</div>
-					<div class="options" id="custom">
+					<div class="card optionsBox" id="custom">
 						<p>Custom Characters</p>
 						<textarea placeholder="Alice, Brooklyn, Charlotte" rows="5" cols="40"></textarea>
 						<button class="button primaryButton" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
@@ -65,15 +80,19 @@
 					</div>
 				</div>
 				
-				<div id="actions" class="options">
+				<div id="actions" class="card optionsBox">
 					<p>Actions</p>
-					<label><input type="checkbox" checked="true"> Fuck</label>
-					<label><input type="checkbox" checked="true"> Marry</label>
-					<label><input type="checkbox" checked="true"> Kill</label>
-					<label><input type="checkbox"> Deepthroat</label>
-					<label><input type="checkbox"> Beat up</label>
-					<label><input type="checkbox"> Eat out</label>
-					<label><input type="checkbox"> Rape</label>
+					<div id="actList">
+						<label><input type="checkbox" checked="true"> Fuck</label>
+						<label><input type="checkbox" checked="true"> Marry</label>
+						<label><input type="checkbox" checked="true"> Kill</label>
+						<label><input type="checkbox"> Deepthroat</label>
+						<label><input type="checkbox"> Beat up</label>
+						<label><input type="checkbox"> Eat out</label>
+						<label><input type="checkbox"> Rape</label>
+					</div>
+					<button class="button primaryButton" onclick="selections('select', 'actList')">Select all</button>
+					<button class="button primaryButton" onclick="selections('unselect', 'actList')">Unselect all</button>
 				</div>
 			</div>
 			<div class="navCont">			
