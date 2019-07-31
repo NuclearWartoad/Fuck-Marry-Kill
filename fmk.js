@@ -148,6 +148,8 @@ function statistics() {
 		
 		$(html).appendTo('.statsCont').css("background-image", "url(img/"+c+".png)");  
 	}
+	
+	$('.statsCont').children().css("height", 	parseInt($('.statsCont').children().css("width").slice(0, -2))*1.5);
 }
 
 function selections(instruction, list) {
