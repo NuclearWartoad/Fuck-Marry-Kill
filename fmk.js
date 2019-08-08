@@ -1,5 +1,7 @@
 'use strict'
 
+let NSFWEnabled = true;
+
 // Screen change
 
 function toScreen(screen) {
@@ -16,7 +18,7 @@ let charArrays = {
 	'Doki Doki Literature Club!': ['Monika', 'Natsuki', 'Sayori', 'Yuri'],
 	Disney: ['Anna', 'Elsa', 'Moana', 'Merida', 'Rapunzel', 'Jasmine', 'Pocahontas', 'Mulan', 'Ariel'],
 	'Harry Potter': ['Hermione Granger', 'Ginny Weasley', 'Luna Lovegood'],
-	Marvel: ['Black Widow', 'Gamorra', 'Jessica Jones', 'Pepper Potts', 'Valkyrie'],
+	Marvel: ['Black Widow', 'Gamorra', 'Jessica Jones', 'Pepper Potts', 'Valkyrie', 'Captain Marvel'],
 	'Star Wars': ['Leia Organa', 'Padme Amidala', 'Rey', 'Ahsoka Tano'],
 	Skyrim: ['Aela the Huntress', 'Lydia', 'Serana'],
 	Nintendo: ['Wii Fit Trainer', 'Princess Peach', 'Princess Zelda', 'Samus Aran'],
@@ -69,8 +71,8 @@ function validateOptions() {
 	} else if (enabledChars.length <= actions.length) {
 		$('.warning').text('The number of characters must be larger than the number of actions.');
 	} else {
+		startGame()
 		toScreen('game');
-		main();
 	};
 }
 
@@ -88,44 +90,95 @@ function validateChoices() {
 	};
 }
 
-function main() {
+function startGame() {
 	$('.charCont').children().remove();
 	$('.actionsCont').children().remove();
 	
 	shuffle(enabledChars);
 	
-	for (let i=0; i<actions.length; i++) {
-		$('.charCont').append('<div class="character"> <img src="img/'+enabledChars[i]+'.png" onerror="if (this.src != \'img/noImage.png\') this.src = \'img/noImage.png\';"> <p class="charName">'+enabledChars[i]+'</p> <p class="charSource">'+findSourceMedia(enabledChars[i])+'</p> </div>');
-		$('.actionsCont').append('<div class="action"><p>'+actions[i]+'</p><div class="dropdown"><select></select></div></div>');
+	for (let i = 0; i < actions.length; i++) {
+		
+		let characterHTML = `<div class="character"> 
+											<img src="img/`+enabledChars[i]+(NSFWEnabled ? "NSFW" : "")+`.png">
+												<div class="artistCont"><a href="https://www.deviantart.com/dandonfuga">Dandon Fuga</a></div>
+											</img> 
+											<p class="charName">`+enabledChars[i]+`</p> 
+											<p class="charSource">`+findSourceMedia(enabledChars[i])+`</p> 
+										</div>`
+		let actionHTML = `<div class="action">
+										<p>`+actions[i]+`</p>
+										<div class="dropdown">
+											<select></select>
+										</div>
+									</div>`
+		$('.charCont').append(characterHTML);
+		$('.actionsCont').append(actionHTML);
 	};
+	
+	$('.character img').on('error',  // If NSFW image isn't found, fall back to SFW, then to default image
+		function() {
+			//console.log('error');
+			let src = $(this).attr('src');
+			
+			if (src.includes('NSFW')) {
+				$(this).attr('src', src.replace('NSFW', ''));
+			}
+			else if (src != 'img/noImage.png') {
+				$(this).attr('src', 'img/noImage.png');
+			}
+			
+		}
+	);
+	
 	$('select').append('<option value="" selected></option>');
-	for (let i=0; i<actions.length; i++) {
+	for (let i = 0; i < actions.length; i++) {
 		$('select').append('<option value="'+enabledChars[i]+'">'+enabledChars[i]+'</option>');
 	};
 	
-	$('select').click(function() {
+	
+	$('select').change( function() { // Prevents picking the same character multiple times
 		let clicked = $(this);
-		let ch = $(this).val();
 		
-		$(this).children().prop('disabled', false);
+		let selected = [];
 		
-		$('select').each( function() {
-			if ($(this).val() != '' && !($(this).is(clicked))) {
-				console.log($(this).val());
-				$('option[value="'+$(this).val()+'"]').filter( function() {
-					return ($(this).parent().is(clicked)); 
-				}).prop('disabled', true);
-			}
+		$('select').each(
 			
-		setTimeout(function() {$(this).hide().show(0);}, 2000 );
-		});
+			function() {			
+				if ($(this).val() != '') {		
+					selected.push($(this).val());
+				}
+			}
+		);
+		
+		$('option').each(
+			function() {
+				if (selected.includes($(this).val()) && $(this).parent().val() != $(this).val()) {
+					$(this).attr('disabled', 'true');
+				} else {
+					$(this).removeAttr('disabled');
+				}
+			}
+		);
 	});
 }
 
+function main() {
+	shuffle(enabledChars);
+	
+	for (let i = 0; i < actions.length; i++) { // Update cards (instead of replacing them entirely)
+		let card = $($('.charCont').children()[i]);
+		$(card.children()[0]).attr('src', 'img/'+enabledChars[i]+(NSFWEnabled ? "NSFW" : "")+'.png')
+		$(card.children()[2]).text(enabledChars[i])
+		$(card.children()[3]).text(findSourceMedia(enabledChars[i]));
+	} 
+	
+}
 
 // Helper functions
 
 function statistics() {
+	$('.statsCont').children().remove();
+	
 	var charList = [];
 	for (const KV of Object.entries(charArrays)) {
 		charList = charList.concat(KV[1]);
@@ -213,8 +266,9 @@ function fn(e) {
 
 document.addEventListener('mousemove', fn, false);
 
-$('.options span').hover( 
+$('.options label').hover( 
 	function() {
+		console.log('feck');
 		let str = $(this).parent().text();		
 		let arr = charArrays[str.substring(1, str.lastIndexOf(" "))];
 		if (arr.length != 0) {
@@ -226,5 +280,19 @@ $('.options span').hover(
 	}
 );
 
+$('.charCont').on('mouseenter', '.character',  
+	function() {
+		$($(this).children()[1]).css('opacity', 1);
+	}
+);	
+$('.charCont').on('mouseleave', '.character',  
+	function() {
+		$($(this).children()[1]).css('opacity', 0);
+	}
+);	
+
+function imgErrorHandler() {
+	
+}
 // Misc
 

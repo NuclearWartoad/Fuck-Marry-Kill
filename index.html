@@ -37,15 +37,16 @@
 				<div class="primaryButton button menuButton" onclick="toScreen('setup')">Play</div>
 				<div class="button menuButton" onclick="toScreen('settings')">Settings</div>
 				<div class="button menuButton" onclick="toScreen('stats'); statistics()">Stats</div>
-				<a href="https://reddit.com/r/FMKGame"><div class="button menuButton redditButton" ><img width="20" height="auto" src="redditIcon.png">Discuss</div></a>
+				<div class="button menuButton redditButton" ><a href="https://reddit.com/r/FMKGame"><img width="20" height="auto" src="redditIcon.png">Discuss</a></div>
 			</div>
 		</div>
 		<div class="screen settingsScreen">
 			<div class="card"><p>Settings</p></div>
 		</div>
 		<div class="screen statsScreen">
+			<h2>Statistics</h2>
 			<div class="statsHeader">
-				<h2>Statistics</h2>
+				<div class="button navButton" onclick="toScreen('menu')">Menu</div>
 				<div class="switchCont">
 					<div class="selectedSwitch" onclick="switchLocality('local')">Local</div>
 					<div onclick="switchLocality('global')">Global</div>
@@ -62,21 +63,21 @@
 					
 					<div id="charList"></div>
 					
-					<button class="button primaryButton" onclick="selections('select', 'charList')">Select all</button>
-					<button class="button primaryButton" onclick="selections('unselect', 'charList')">Unselect all</button>
+					<button class="button" onclick="selections('select', 'charList')">Select all</button>
+					<button class="button" onclick="selections('unselect', 'charList')">Unselect all</button>
 					<div class="tooltip"></div>
 				</div>
 				<div class="centerColumn">
 					<div class="card optionsBox" id="genders">
 						<p>Genders</p>
-						<label><input type="checkbox"> Male</label>
+						<label class="indev"><input type="checkbox" disabled> Male</label>
 						<label><input type="checkbox" checked="true"> Female</label>
 					</div>
 					<div class="card optionsBox" id="custom">
 						<p>Custom Characters</p>
 						<textarea placeholder="Alice, Brooklyn, Charlotte" rows="5" cols="40"></textarea>
-						<button class="button primaryButton" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
-						<button class="button primaryButton" onclick="saveCustom(); updateCustom()">Save</button>
+						<button class="button" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
+						<button class="button" onclick="saveCustom(); updateCustom()">Save</button>
 					</div>
 				</div>
 				
@@ -91,8 +92,8 @@
 						<label><input type="checkbox"> Eat out</label>
 						<label><input type="checkbox"> Rape</label>
 					</div>
-					<button class="button primaryButton" onclick="selections('select', 'actList')">Select all</button>
-					<button class="button primaryButton" onclick="selections('unselect', 'actList')">Unselect all</button>
+					<button class="button" onclick="selections('select', 'actList')">Select all</button>
+					<button class="button" onclick="selections('unselect', 'actList')">Unselect all</button>
 				</div>
 			</div>
 			<div class="navCont">			
