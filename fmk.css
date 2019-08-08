@@ -7,6 +7,7 @@
 	--darker: #222;
 	--subtleText: #999;
 	--reddit: #ff3f18;
+	--discord: #7289DA;
 }
 
 body {
@@ -260,16 +261,19 @@ button {
 	background-color: var(--reddit) !important;
 }
 
-.redditButton {
+.discordButton:hover {
+	background-color: var(--discord) !important;
+}
+
+.redditButton, .discordButton {
 	display: flex;
 	align-items:center;
 	justify-content: center;
 }
 
-.redditButton img {
-	width: 25px;
-	height: auto;
-	margin-right: 5px;
+.redditButton img, .discordButton img {
+	height: 25px;
+	width: auto;
 }
 
 .navButton {
