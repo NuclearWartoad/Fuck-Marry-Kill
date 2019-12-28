@@ -34,7 +34,7 @@
 				<line  x1="10" y1="20" x2="10" y2="2000" style="stroke:#fafafa; stroke-width:3"/>
 			</svg>
 			<div class="menuColumn">
-				<div class="primaryButton button menuButton" onclick="toScreen('setup')">Play</div>
+				<div class="primaryButton button menuButton" onclick="toScreen('options')">Play</div>
 				<div class="button menuButton" onclick="toScreen('settings')">Settings</div>
 				<div class="button menuButton" onclick="toScreen('stats'); statistics()">Stats</div>
 				<a class="button menuButton redditButton" href="https://reddit.com/r/FMKGame"><img width="20" height="auto" src="redditLogo.png"></a>
@@ -56,7 +56,8 @@
 			<div class="statsCont">
 			</div>
 		</div>
-		<div class="screen setupScreen">
+
+		<div class="screen optionsScreen">
 			<div class="optionsCont">
 				
 				<div class="card optionsBox" id="characters">
@@ -68,22 +69,23 @@
 					<button class="button" onclick="selections('unselect', 'charList')">Unselect all</button>
 					<div class="tooltip"></div>
 				</div>
-				<div class="centerColumn">
-					<div class="card optionsBox" id="genders">
-						<p>Genders</p>
-						<label class="indev"><input type="checkbox" disabled> Male</label>
-						<label><input type="checkbox" checked="true"> Female</label>
-					</div>
-					<div class="card optionsBox" id="custom">
-						<p>Custom Characters</p>
-						<textarea placeholder="Alice, Brooklyn, Charlotte" rows="5" cols="40"></textarea>
-						<button class="button" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
-						<button class="button" onclick="saveCustom(); updateCustom()">Save</button>
-					</div>
+
+				<div class="card optionsBox" id="genders">
+					<p>Genders</p>
+					<label class="indev"><input type="checkbox" disabled> Male</label>
+					<label><input type="checkbox" checked="true"> Female</label>
+				</div>
+
+				<div class="card optionsBox" id="custom">
+					<p>Custom Characters</p>
+					<textarea placeholder="Alice, Brooklyn, Charlotte" rows="5" cols="40"></textarea>
+					<button class="button" onclick="localStorage.clear(); updateCustom()">Clear custom</button>
+					<button class="button" onclick="saveCustom(); updateCustom()">Save</button>
 				</div>
 				
 				<div id="actions" class="card optionsBox">
 					<p>Actions</p>
+
 					<div id="actList">
 						<label><input type="checkbox" checked="true"> Fuck</label>
 						<label><input type="checkbox" checked="true"> Marry</label>
@@ -93,21 +95,23 @@
 						<label><input type="checkbox"> Eat out</label>
 						<label><input type="checkbox"> Rape</label>
 					</div>
+					
 					<button class="button" onclick="selections('select', 'actList')">Select all</button>
 					<button class="button" onclick="selections('unselect', 'actList')">Unselect all</button>
 				</div>
-			</div>
-			<div class="navCont">			
-				<div class="button navButton" onclick="toScreen('menu')">Menu</div>
-				<p class="warning"></p>
-				<div class="primaryButton navButton button" onclick="validateOptions()">Start</div>
+			
+				<div class="navCont">			
+					<div class="button navButton" onclick="toScreen('menu')">Menu</div>
+					<p class="warning"></p>
+					<div class="primaryButton navButton button" onclick="validateOptions()">Start</div>
+				</div>
 			</div>
 		</div>
 		<div class="screen gameScreen">
 			<div class="charCont"></div>
 			<div class="actionsCont"></div>
 			<div class="navCont">			
-				<div class="button navButton" onclick="toScreen('setup')">Options</div>
+				<div class="button navButton" onclick="toScreen('options')">Options</div>
 				<div class="button navButton" onclick="main()">Skip</div>
 				<div class="button navButton primaryButton" onclick="validateChoices()">Next</div>
 			</div>

@@ -80,10 +80,6 @@ select {
 	appearance: none;
 }
 
-.indev {
-	
-}
-
 .indev:after {
 	margin-left: 10px;
 	font-size: 15px;
@@ -158,10 +154,16 @@ button {
 
 .screen {
 	display: none;
+	height: 100vh;
 }
 
 .menuScreen {
 	display: default;
+}
+
+.optionsScreen {
+	align-items: center;
+	justify-content: center;
 }
 
 .gameScreen {
@@ -295,21 +297,21 @@ button {
 }
 
 .optionsCont {
-	display: flex;
-	flex-flow: row wrap;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 200px 300px 50px;
+	grid-gap: 20px;
 	justify-content: center;
-	max-height: 500px;
-	margin: 100px auto 0;
+	width: 1200px;
 }
 
 .optionsBox {
 	padding: 40px;
-	min-width: 300px;
+	/*min-width: 300px;*/
 }
 
 .card {
 	border-radius: 5px;
-	margin: 10px;
 	font-size: 18px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.05);
 }
@@ -332,12 +334,18 @@ button {
 	/*pointer-events: none;*/
 }
 
-.optionsBox span:hover {
-	outline: 1px solid red;
+#characters {
+	grid-row: 1 / span 2;
+	grid-column: 1 / span 1;
+}	
+
+#genders, #custom {
+	grid-column: 2 / span 1;
 }
 
-#custom, #genders {
-	flex: 1 auto;
+#actions {
+	grid-row: 1 / span 2;
+	grid-column: 3 / span 1;
 }
 
 textarea {
@@ -371,8 +379,7 @@ textarea:focus {
 }
 
 .navCont {
-	margin: 50px auto 0;
-	max-width: 1250px;
+	grid-column: 1 / span 3;
 	display: flex;
 	justify-content: space-between;
 }

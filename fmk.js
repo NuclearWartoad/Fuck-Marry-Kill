@@ -6,7 +6,7 @@ let NSFWEnabled = true;
 
 function toScreen(screen) {
 	$('.screen').hide();
-	$('.'+screen+'Screen').show();
+	$('.'+screen+'Screen').css('display', 'flex');
 }
 
 // Game
@@ -266,12 +266,13 @@ function fn(e) {
 
 document.addEventListener('mousemove', fn, false);
 
-$('.options label').hover( 
+$('#charList label').hover( 
 	function() {
-		console.log('feck');
-		let str = $(this).parent().text();		
+		
+		let str = $(this).text();	
+		console.log(str);	
 		let arr = charArrays[str.substring(1, str.lastIndexOf(" "))];
-		if (arr.length != 0) {
+		if (arr.length > 0) {
 			$('.tooltip').show();		
 			$('.tooltip').text(arr.join(', '));
 		}
