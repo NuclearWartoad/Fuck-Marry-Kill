@@ -161,7 +161,7 @@ button {
 	display: default;
 }
 
-.optionsScreen {
+.optionsScreen, .gameScreen {
 	align-items: center;
 	justify-content: center;
 }
@@ -287,10 +287,6 @@ button {
 	line-height: 30px;
 }
 
-.navButton:hover {
-	/*border: 1px solid var(--dark);*/
-}
-
 .menu {
 	width: 400px;
 	margin: 125px auto 0px;
@@ -379,9 +375,10 @@ textarea:focus {
 }
 
 .navCont {
-	grid-column: 1 / span 3;
+	grid-column: 1 / -1;
 	display: flex;
 	justify-content: space-between;
+	justify-self: stretch;
 }
 
 .warning {
@@ -389,11 +386,19 @@ textarea:focus {
 	line-height: 0px;
 }
 
+.gameCont {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 55px 50px;
+	justify-items: center;
+	grid-gap: 20px;
+	margin: 0 25px 0;
+}
+
 .charCont {
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	margin: 50px auto 0;
 }
 
 .character {
@@ -404,6 +409,14 @@ textarea:focus {
 	flex-shrink: 2;
 	max-width: 250px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.05);
+}
+
+.character:first-of-type {
+	margin-left: 0px;
+}
+
+.character:last-of-type {
+	margin-right: 0px;
 }
 
 .artistCont {
@@ -448,8 +461,8 @@ textarea:focus {
 	display: inline-block;
 	border: 1px solid var(--dark);
 	border-radius: 5px;
-	margin: 50px auto 0px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 15px 40px rgba(0, 0, 0, 0.05);
+	grid-row: 2 / span 1;
 }
 
 .action {

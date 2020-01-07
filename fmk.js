@@ -67,9 +67,9 @@ function validateOptions() {
 	});
 	
 	if (actions.length < 2) {
-		$('.warning').text('At least 2 actions required.');
+		showWarning('At least 2 actions required.');
 	} else if (enabledChars.length <= actions.length) {
-		$('.warning').text('The number of characters must be larger than the number of actions.');
+		showWarning('The number of characters must be larger than the number of actions.');
 	} else {
 		startGame()
 		toScreen('game');
@@ -176,6 +176,11 @@ function main() {
 
 // Helper functions
 
+function showWarning(warnText) {
+	$('.warning').text(warnText);
+	var timeoutID = window.setTimeout( function() { $('.warning').text('') }, 4000 );
+}
+
 function statistics() {
 	$('.statsCont').children().remove();
 	
@@ -237,6 +242,8 @@ function shuffle(array) { // fisher-yates
 }
 
 function saveCustom() {
+	const charLimit = 25;
+
 	let txt = $('textarea').val();
 	if (txt != "") {
 		let previous = (!localStorage.getItem('custom'))  ? [] : localStorage.getItem('custom').split(",")
@@ -244,8 +251,11 @@ function saveCustom() {
 		let newCustom = []
 		for (let character of txt.split(", ")) {
 			if (previous.indexOf(character) == -1) {
-				previous.push(character);
-				console.log(character)
+				if (character.length > charLimit) {
+					showWarning("Character names can't be longer than "+ charLimit + " characters.");
+				} else {
+					previous.push(character);
+				}
 			}
 		}
 		localStorage.setItem('custom', previous.concat(newCustom));
@@ -270,7 +280,6 @@ $('#charList label').hover(
 	function() {
 		
 		let str = $(this).text();	
-		console.log(str);	
 		let arr = charArrays[str.substring(1, str.lastIndexOf(" "))];
 		if (arr.length > 0) {
 			$('.tooltip').show();		
