@@ -157,10 +157,6 @@ button {
 	height: 100vh;
 }
 
-.menuScreen {
-	display: default;
-}
-
 .optionsScreen, .gameScreen {
 	align-items: center;
 	justify-content: center;
@@ -213,8 +209,6 @@ button {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	
-	
 }
 
 #divider {
@@ -232,19 +226,15 @@ button {
 }
 
 .button {
-	/*border: 1px solid #999;*/
 	border-radius: 50px;
 	text-align: center;
 	cursor: pointer;
-	user-select: none;
-	
+	user-select: none;	
 	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.25);
-	
 	transition: all 0.2s;
 }
 
 .button:hover {
-	/*border: 1px solid var(--dark);*/
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -281,7 +271,6 @@ button {
 .navButton {
 	width: 120px;
 	height: 30px;
-	/*border: 1px solid #999;*/
 	border-radius: 5px;
 	text-align: center;
 	line-height: 30px;
@@ -303,7 +292,6 @@ button {
 
 .optionsBox {
 	padding: 40px;
-	/*min-width: 300px;*/
 }
 
 .card {
@@ -321,13 +309,10 @@ button {
 .optionsBox span {
 	color: var(--main);
 	font-size: 15px;
-	pointer-events: auto;
-	z-index: 99;
 }
 
 .card label {
 	display: block;
-	/*pointer-events: none;*/
 }
 
 #characters {
@@ -402,7 +387,7 @@ textarea:focus {
 }
 
 .character {
-	position: relative;
+	position: relative; /* Needed to make artist box work */
 	border: 1px solid var(--dark);
 	border-radius: 5px;
 	margin: 0 10px 0;
