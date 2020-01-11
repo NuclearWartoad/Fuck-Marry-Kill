@@ -154,7 +154,18 @@ button {
 
 .screen {
 	display: none;
-	height: 100vh;
+}
+
+@media (min-width: 1200px) {
+	.screen {
+		height: 100vh;
+	}
+}
+
+@media (max-width: 1199px) {
+	.screen {
+		padding-top: 20px;
+	}
 }
 
 .optionsScreen, .gameScreen {
@@ -283,11 +294,31 @@ button {
 
 .optionsCont {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: 200px 300px 50px;
 	grid-gap: 20px;
 	justify-content: center;
-	width: 1200px;
+}
+
+@media (min-width: 1200px) {
+
+	.optionsCont {
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: 200px 300px 50px;
+		width: 1200px;
+	}
+} 
+
+@media (min-width: 800px) and (max-width: 1199px) {
+	.optionsCont {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 500px 300px 50px;
+	}
+}
+
+@media (max-width: 599px) {
+	.optionsCont {
+		grid-template-columns: 1fr;
+		grid-template-rows: 500px 200px 300px 500px 50px;
+	}
 }
 
 .optionsBox {
@@ -315,19 +346,37 @@ button {
 	display: block;
 }
 
-#characters {
-	grid-row: 1 / span 2;
-	grid-column: 1 / span 1;
-}	
+@media (min-width: 1200px) {
+	#characters {
+		grid-row: 1 / span 2;
+		grid-column: 1 / span 1;
+	}	
 
-#genders, #custom {
-	grid-column: 2 / span 1;
+	#genders, #custom {
+		grid-column: 2 / span 1;
+	}
+
+	#actions {
+		grid-row: 1 / span 2;
+		grid-column: 3 / span 1;
+	}
 }
 
-#actions {
-	grid-row: 1 / span 2;
-	grid-column: 3 / span 1;
+@media (min-width: 800px) and (max-width: 1199px) {
+	#characters {
+		grid-row: 1 / span 1;
+	}	
+
+	#genders {
+		grid-row: 2 / span 1;
+	}
+
+	#actions {
+		grid-row: 1 / span 1;
+		grid-column: 2 / span 1;
+	}
 }
+
 
 textarea {
 	background-color: var(--darker);

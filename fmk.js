@@ -170,7 +170,14 @@ function main() {
 		$(card.children()[0]).attr('src', 'img/'+enabledChars[i]+(NSFWEnabled ? "NSFW" : "")+'.png')
 		$(card.children()[2]).text(enabledChars[i])
 		$(card.children()[3]).text(findSourceMedia(enabledChars[i]));
-	} 
+	};
+
+	$('option').remove();
+
+	$('select').append('<option value="" selected></option>');
+	for (let i = 0; i < actions.length; i++) {
+		$('select').append('<option value="'+enabledChars[i]+'">'+enabledChars[i]+'</option>');
+	};
 	
 }
 
