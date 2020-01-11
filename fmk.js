@@ -99,21 +99,30 @@ function startGame() {
 	for (let i = 0; i < actions.length; i++) {
 		
 		let characterHTML = `<div class="character"> 
-											<img src="img/`+enabledChars[i]+(NSFWEnabled ? "NSFW" : "")+`.png">
-												<div class="artistCont"><a href="https://www.deviantart.com/dandonfuga">Dandon Fuga</a></div>
-											</img> 
-											<p class="charName">`+enabledChars[i]+`</p> 
-											<p class="charSource">`+findSourceMedia(enabledChars[i])+`</p> 
-										</div>`
+								<img class="charImg" src="img/`+enabledChars[i]+(NSFWEnabled ? "NSFW" : "")+`.png">
+									<img class="enlargeIcon" src="enlarge.png">
+									<div class="artistCont"><a href="https://www.deviantart.com/dandonfuga">Dandon Fuga</a></div>
+								</img> 
+								<p class="charName">`+enabledChars[i]+`</p> 
+								<p class="charSource">`+findSourceMedia(enabledChars[i])+`</p> 
+							</div>`
 		let actionHTML = `<div class="action">
-										<p>`+actions[i]+`</p>
-										<div class="dropdown">
-											<select></select>
-										</div>
-									</div>`
+								<p>`+actions[i]+`</p>
+								<div class="dropdown">
+									<select></select>
+								</div>
+							</div>`
 		$('.charCont').append(characterHTML);
 		$('.actionsCont').append(actionHTML);
 	};
+
+	$('.charImg').click(
+		function() {
+			$('.darkener').show();
+			$('.enlargedDiv img').attr('src', $(this).attr('src'))
+			$('.enlargedDiv').show();
+		}
+	);
 	
 	$('.character img').on('error',  // If NSFW image isn't found, fall back to SFW, then to default image
 		function() {
@@ -299,14 +308,23 @@ $('#charList label').hover(
 
 $('.charCont').on('mouseenter', '.character',  
 	function() {
-		$($(this).children()[1]).css('opacity', 1);
+		$($(this).children()[1]).css('display', 'block');
+		$($(this).children()[2]).css('display', 'flex');
 	}
 );	
 $('.charCont').on('mouseleave', '.character',  
 	function() {
-		$($(this).children()[1]).css('opacity', 0);
+		$($(this).children()[1]).hide();
+		$($(this).children()[2]).hide();
 	}
 );	
+
+$('.darkener').click(
+	function() {
+		$(this).hide();
+		$('.popup').hide();
+	}
+)
 
 function imgErrorHandler() {
 	

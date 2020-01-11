@@ -149,6 +149,16 @@ button {
 	color: var(--light);
 }
 
+/* Dark background for popups */
+
+.darkener {
+	display: none;
+	position: absolute;
+	top: 0; left:0; right: 0; bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 98;
+}
+
 
 /* Screens */
 
@@ -453,14 +463,25 @@ textarea:focus {
 	margin-right: 0px;
 }
 
+.charImg:hover {
+	filter: brightness(0.25);
+}
+
+.enlargeIcon {
+	display: none;
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	height: auto;
+}
+
 .artistCont {
-	opacity: 0;
+	display: none;
 	position: absolute;
 	background: rgba(0, 0, 0, 0.75);
 	width: 100%;
 	height: 8%;
 	bottom: 57px;
-	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 14px;
@@ -484,7 +505,7 @@ textarea:focus {
 	font-size: 15px;
 }
 
-.character img {
+.charImg {
 	display: block;
 	max-width: 100%;
 	height: auto;
@@ -508,6 +529,20 @@ textarea:focus {
 .action p {
 	margin: 5px 0 5px;
 }
+
+.enlargedDiv {
+	display: none;
+	position: absolute;
+	left: 50%; top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 99;
+}
+
+.enlargedDiv img {
+	height: 90vh;
+}
+
+/* Stats */
 
 .statsScreen {
 	width: 75%;

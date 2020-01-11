@@ -1,6 +1,7 @@
 # To-do
 
-* Design and implement mobile layout for screens: game, options
+* Add 'click to zoom' icon to character images on hover
 * Find SFW and NSFW images
+* Add characters
 * Add NSFW setting
-* Change way images are stored to add artist field
+* Change way images are stored to add artist field (and to allow for multiple images)
